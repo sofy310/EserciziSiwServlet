@@ -23,16 +23,16 @@ public class ProduciRisposta extends HttpServlet {
 		String userAgent = (String) request.getAttribute("userAgent");
 		String host = (String) request.getAttribute("host");
 		
-		/*GESIONE DELLA RISPOSTA
-		 * Un'intestazione fondamentale è quella che specifica il tipo di contenuto della risposta (HTML). 
-		 *Questa intestazione si specifica con il metodo void setContent(String contentType)*/
+		/*GESIONE DELLA RISPOSTA*/
+		
+		/*La risposta è un documento HTML*/
 		response.setContentType("text/html");
 		
-		/*creo un oggetto su cui scrivere la risposta 
+		/*creo un oggetto su cui scrivere il corpo della risposta 
 		 * questo metodo è fornito dall'oggetto responsabile della risposta */
 		PrintWriter out = response.getWriter();
 		
-		/*scrivo il corpo*/
+		/*scrivo il corpo, dopo che ho creato l'oggetto*/
 	    out.println("<!DOCTYPE html>"); 
 	    out.println("<html>");
 	    out.println("<head>");

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +20,10 @@ public class ProcessaDati extends HttpServlet {
 	
 	
 	/*Gestione della richiesta*/
+	/*request e response sono due riferimenti a oggetti passati dal contenitore
+	 * per gestire rispettivamente la richiesta e la risposta*/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*Leggo i parametri e li metto al maiuscolo*/
+    /*ritorna il valore del parametro se il risultato esiste, altrimenti ritorna null*/
 		String nome = request.getParameter("nome").toUpperCase();
 		String cognome = request.getParameter("cognome").toUpperCase();
 		
@@ -38,7 +41,18 @@ public class ProcessaDati extends HttpServlet {
 
 		/*l'oggetto di tipo ServletContext rappresenta l'applicazione Web
 		 * Tutti i servlet hanno accesso al ServletContext tramite il metodo getServletContext()*/
+		/*consente la comunicazione tra gli oggetti del servlet e il contenitore
+		 * consente di manipolalre oggetti condivisi accessibili da tutte le classi dell'app*/
 		ServletContext application = getServletContext();
+		
+		/*riferimento all'altra classe*/
+		/*grazie al RequestDispatcher siamo in grado di inoltrare
+		 * richieste ad altri oggetti servlet*/
+		RequestDispatcher rd = application.getRequestDispatcher("/risposta.jsp");
+		
+		/*inoltro della richiesta*/
+		rd.forward(request, response);
+		return;
 	}
 	
 }
